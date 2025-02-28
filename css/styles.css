@@ -11063,7 +11063,7 @@ body {
   border: 0;
 }
 
-.masthead {
+/* .masthead {
   position: relative;
   width: 100%;
   height: auto;
@@ -11074,7 +11074,21 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+} */
+
+.masthead {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.7) 75%, #000 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
 }
+
 .masthead h1, .masthead .h1 {
   font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 2.5rem;
@@ -11111,10 +11125,16 @@ body {
   }
 }
 
-.about-section {
+/* .about-section {
   padding-top: 10rem;
   background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+} */
+
+.about-section {
+  padding-top: 10rem;
+  background: black;
 }
+
 .about-section p {
   margin-bottom: 5rem;
 }
@@ -11128,7 +11148,7 @@ body {
 @media (min-width: 992px) {
   .projects-section .featured-text {
     padding: 0 0 0 2rem;
-    border-left: 0.5rem solid #64a19d;
+    /* border-left: 0.5rem solid #64a19d; */
   }
 }
 .projects-section .project-text {
