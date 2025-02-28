@@ -11131,8 +11131,20 @@ body {
 } */
 
 .about-section {
-  padding-top: 10rem;
-  background: black;
+  min-height: 100vh; /* Ensures the About section fills the entire viewport */
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center; /* Vertically centers the content */
+  background-color: black;
+}
+
+
+.about-section .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Ensures the text is centered inside the container */
 }
 
 .about-section p {
@@ -11181,7 +11193,13 @@ body {
 }
 
 .contact-section {
+  min-height: 72vh;
+  display: flex;
   padding-top: 5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing:border-box;
 }
 .contact-section .card {
   border: 0;
