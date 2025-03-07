@@ -377,11 +377,11 @@ body, html {
   flex-grow: 1;
 }
 
-.contact-box div:hover {
+/* .contact-box div:hover {
   background: linear-gradient(to bottom, #eee, #ccc);
   box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 1), inset -3px -3px 10px rgba(255, 255, 255, 1);
   text-shadow: white 2px 2px 5px;
-}
+} */
 
 .contact-box h3 {
   font-size: clamp(1.2rem, 4vw, 2rem); /* This makes the h3 text more responsive */
