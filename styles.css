@@ -1,0 +1,417 @@
+/* Reset default browser styles */
+body, html {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #eee;
+  }
+  
+  /* Header with navigation bar */
+  header {
+    background-color: #130D13;
+    color: #eee;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+  }
+  
+  nav ul {
+    /* background-color: blue; */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  nav li {
+    margin: 0px 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: transparent 2px;
+  }
+
+  nav li:hover {
+    /* padding: 5px 10px; */
+    background-color: #231823;
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5), inset -5px -5px 5px rgba(255, 255, 255, 0.05);
+    border:#eee 2px;
+  }
+  
+  nav a {
+    color: #eee;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  /* nav a:hover {
+    text-decoration: underline;
+  } */
+  
+  /* Ensure #Home is fullscreen */
+  #Home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    background-color: #130D13;
+    color: #eee;
+    position: relative; /* Needed for absolute positioning of children */
+    overflow: hidden;
+    box-shadow: #0D0709 0px 0px 20px;
+  }
+  
+  /* Force Three.js canvas inside #Home */
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    box-shadow: #0D0709 0px 10px 20px;
+  }
+  
+/* Welcome message should stay on top */
+#welcomeMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    padding: 20px;
+    user-select: none;
+    pointer-events: none;
+}
+
+  #welcomeMessage h1,
+  #welcomeMessage h2 {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+
+  }
+  
+  #welcomeMessage h1 {
+    font-size: 36px;
+  }
+  
+  #welcomeMessage h2 {
+    font-size: 24px;
+  }
+  
+/* About section */
+#about .about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+#about .about-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('./assets/Samuel_Bienz.jpg') bottom center no-repeat;
+  background-size: cover;
+  padding-top: 52%;
+  position: relative;
+}
+
+/* New class for text container */
+#about .about-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 40%;
+  right: 10%;
+  transform: translateY(-50%);
+  background: none;
+  border-radius: 10px;
+  max-width: 40%;
+  min-width: 210px;
+  width: fit-content;
+}
+
+/* Prevent line breaks in the header */
+#about h2 {
+  font-size: clamp(32px, 3vw, 64px);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  user-select: none;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
+}
+
+#about p {
+  min-height: 116px;
+  max-width: 650px;
+  font-size: clamp(16px, 3vw, 32px);
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  user-select: none;
+  text-align: center;
+  /* word-wrap: break-word; */
+}
+
+
+/* Project section */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #eee;
+}
+
+.project-main {
+  background: #130D13;
+  padding: 20px 20px;
+  margin: 80px 0;
+  display: flex;
+  max-width: 1200px; /* Adjust as needed */
+  width: 100%;
+  box-sizing: border-box;
+  text-shadow: #0D0709 1px 1px 2px;
+  border-radius: 10px;
+}
+
+/* Side-by-side columns for wider screens */
+.project-main > * {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.project {
+  background: #130D13;
+  padding: 20px;
+  display: flex;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin: 2px 0;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 1);
+}
+.project:hover {
+  background: linear-gradient(to bottom, #130D13, #231823);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), -2px -2px 3px rgba(255, 255, 255, 1);
+}
+
+.project-main:hover {
+  background: linear-gradient(to bottom, #130D13, #231823);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5), -2px -2px 3px rgba(255, 255, 255, 1);
+}
+
+
+/* Side-by-side columns for wider screens */
+.project > * {
+  flex: 1;
+  box-sizing: border-box;
+}
+
+/* Video column: maintain 16:9 ratio */
+.project-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: transparent;
+  margin-bottom: 0;
+}
+
+.project-video iframe,
+.project-video img {
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+}
+
+.project-text {
+  font-size: clamp(14px, 2vw, 18px);
+  text-align: center;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2px;
+  box-sizing: border-box;
+  text-shadow: #0D0709 0px 0px 5px;
+}
+
+.project-main-text {
+  font-size: clamp(14px, 2vw, 18px);
+  text-align: center;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2px;
+  box-sizing: border-box;
+  text-shadow: #0D0709 0px 0px 5px;
+}
+
+/* Text styling */
+.project-text h4 {
+  margin-top: 0;
+}
+.project-main-text h4 {
+  font-size: clamp(24px, 2vw, 72px);
+  margin-top: 0;
+}
+
+.project-text p {
+  margin: 20px;
+  color: #eee;
+}
+
+.project-main-text p {
+  margin: 20px;
+  color: #eee;
+}
+
+.project-text a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.project-text a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: stack video above text on smaller screens */
+@media (max-width: 900px) {
+  .project {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .project-main {
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .project-video{
+    order: 1;
+  }
+
+  /* Ensure full width for both columns in column layout */
+  .project-video,
+  .project-text {
+    width: 100%;
+  }
+
+  .project-main-text {
+    width: 100%;
+  }
+
+
+  /* Optionally add margin to separate video and text in column layout */
+  .project-text {
+    padding: 20px;
+    order: 2;
+  }
+
+  .project-text h4 {
+    font-size: clamp(16px, 2vw, 72px);
+  }
+
+  .project-main-text {
+    padding: 20px;
+    order: 2;
+  }
+}
+
+  
+/* Contact section */
+#contact {
+  background-color: #130D13;
+  color: #eee;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.contact-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch; /* Ensures all boxes have the same height */
+  margin-top: 50px;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  flex-direction: row;
+}
+
+.contact-box div {
+  font-size: clamp(1rem, 2vw, 1.5rem); /* Makes the font size responsive but within defined limits */
+  background: #eee;
+  color: black;
+  padding: 20px;
+  margin: 1vw;
+  border-radius: 25px;
+  width: clamp(300px, 20vw, 500px);
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.contact-box div:hover {
+  background: linear-gradient(to bottom, #eee, #ccc);
+  box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 1), inset -3px -3px 10px rgba(255, 255, 255, 1);
+  text-shadow: white 2px 2px 5px;
+}
+
+.contact-box h3 {
+  font-size: clamp(1.2rem, 4vw, 2rem); /* This makes the h3 text more responsive */
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+
+.contact-box p {
+  font-size: clamp(1rem, 3vw, 1.2rem); /* Ensure p doesn't become too small on small screens */
+}
+
+/* Responsive: Stack boxes vertically on smaller screens */
+@media (max-width: 900px) {
+  .contact-box {
+    flex-direction: column;
+    align-items: center; /* Center the boxes */
+  }
+}
+
+  
+  /* Footer section */
+  footer {
+    background-color: #130D13;
+    color: #eee;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Footer copyright */
+  footer p {
+    margin: 0;
+    font-size: 14px;
+  }
