@@ -450,7 +450,7 @@ function handleWindowResize() {
   camera.position.z = newZ;
   defaultPosition.z = newZ;
 
-  console.log(width, height);
+  // console.log(width, height);
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);

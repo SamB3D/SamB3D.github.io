@@ -107,21 +107,17 @@ nav li:hover::before {
 }
 
 /* Hide navigation links by default on small screens */
-#nav-menu {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  /* padding-top: 10px; */
-  /* padding-bottom: 10px; */
-  /* translate: 0 60px; */
-  background-color: #130D13;
-  /* box-shadow: #0D0709 0px 20px 20px; */
-
-}
-
-#nav-menu ul {
-  display: flex;
-  justify-content: center;
+/* Ensure the menu icon is visible on mobile */
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #eee;
+  padding: 10px 20px;
+  position: fixed;
+  top: 10px;
+  right: 2vw;
+  z-index: 20;
 }
 
 @media (max-width: 768px) {
@@ -141,6 +137,10 @@ nav li:hover::before {
     box-shadow: #0D0709 0px 20px 20px;
   }
 
+  #nav-menu.show {
+    display: flex;
+  }
+
   #nav-menu ul {
     flex-direction: column;
     width: 100%;
@@ -151,15 +151,6 @@ nav li:hover::before {
     text-align: center;
     padding: 10px 0;
   }
-
-  #nav-menu li:hover {
-    background-color: #231823;
-  }
-}
-
-/* Show the menu when the menu-icon is clicked */
-#nav-menu.show {
-  display: flex;
 }
   
   
