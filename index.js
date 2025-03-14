@@ -3,6 +3,8 @@ import getLayer from "./getLayer.js";
 import { OrbitControls } from "jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "jsm/loaders/GLTFLoader.js";
 
+
+
 // Color configuration
 const COLORS = {
   hover: 0x00ff00, // Green on hover
