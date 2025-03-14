@@ -23,7 +23,7 @@ function getLayer({
   color = "#898EC5", // Default: Red (Hex format)
   numSprites = 10,
   opacity = 1,
-  path = "./grad.png",
+  path = "./assets/grad.png",
   radius = 1,
   size = 1,
   z = 0,
