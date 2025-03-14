@@ -3,14 +3,20 @@ import getLayer from "./getLayer.js";
 import { OrbitControls } from "jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "jsm/loaders/GLTFLoader.js";
 
+// Color configuration
+const COLORS = {
+  hover: 0x00ff00, // Green on hover
+  default: 0xff0000, // Red by default
+};
+
 // Initiate basics
 const w = window.innerWidth;
 const h = window.innerHeight;
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(80, w / h, 0.1, 1000);
-camera.position.set(0, 0, 2.5);
+const camera = new THREE.PerspectiveCamera(30, w / h, 0.1, 1000);
+camera.position.set(0, 0, 5);
 const defaultTarget = new THREE.Vector3(0, 0, 0);
-const defaultPosition = new THREE.Vector3(0, 0, 2.5); // Default camera position
+const defaultPosition = new THREE.Vector3(0, 0, 5); // Default camera position
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
 document.body.appendChild(renderer.domElement);
@@ -19,13 +25,11 @@ document.body.appendChild(renderer.domElement);
 const ctrls = new OrbitControls(camera, renderer.domElement);
 ctrls.enableDamping = true;
 ctrls.dampingFactor = 0.1;
-ctrls.enableZoom = false;
+ctrls.enableZoom = false; // Disable zoom to maintain a fixed distance from the scene
 ctrls.enableRotate = true;
 ctrls.target.set(0, 0, 0);
 
 // Set hard limits for horizontal and vertical orbiting
-// Horizontal limits: free zone: ±25°, hard limit: ±45°
-// Vertical limits: center at 90°; free zone: 90°±25° (65° to 115°); hard limit: 90°±45° (45° to 135°)
 ctrls.minAzimuthAngle = THREE.MathUtils.degToRad(-30);
 ctrls.maxAzimuthAngle = THREE.MathUtils.degToRad(30);
 ctrls.minPolarAngle = THREE.MathUtils.degToRad(60);
@@ -33,20 +37,15 @@ ctrls.maxPolarAngle = THREE.MathUtils.degToRad(120);
 
 let isSnappingBack = true;
 let isUserRotating = false;
-let isDraggingMesh = false;
 let lastMeshMoveTime = Date.now(); // Timer to track the last mesh movement
-
-// Raycaster for detecting clicks
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
 
 // Bone movement variables
 let selectedBone = null;
 let isDragging = false;
-let clickedOnSphere = false;
-let testSuzanne, skinnedMesh, skeleton;
+let clickedOnController = false;
+let gltfMesh;
 let deformBones = []; // To store deform bones
-let spheres = [];     // To store the spheres created for bones
+let controllers = []; // To store the controllers created for bones
 
 // Spring dynamics variables for rubber effect
 const springDamping = 0.1;  // Damping factor to control speed of spring return
@@ -88,65 +87,91 @@ const skydome = new THREE.Mesh(skydomeGeometry, skydomeMaterial);
 scene.add(skydome);
 
 // Keep Skydome Fixed
-function updateSkydome() {
-  skydome.position.copy(camera.position);
-}
-
 
 // Load GLTF
 const gltfLoader = new GLTFLoader();
-gltfLoader.load("./blender/testSuzanne.glb", (gltf) => {
-  testSuzanne = gltf.scene;
+gltfLoader.load("./assets/blender/Sam_Browser.glb", (gltf) => {
+  gltfMesh = gltf.scene;
 
-  console.log(testSuzanne);
+  // console.log(gltfMesh);
 
-  testSuzanne.traverse((child) => {
+  gltfMesh.traverse((child) => {
     if (child.isMesh) {
-      console.log(child);
-      child.geometry.center();
-      skinnedMesh = child;
+      child.geometry;
+
+      // Create a material that uses vertex colors
+      const gltfMat = new THREE.MeshStandardMaterial({
+        vertexColors: true,
+        roughness: 0.5,
+        metalness: 0.1,
+      });
+
+      // Assign the material to the mesh
+      child.material = gltfMat;
+
+      // console.log(child);
     }
-    if (child.isBone && child.name.startsWith("DEF-")) {
+    if (child.isBone && child.name.startsWith("DEF-") && !child.name.endsWith("_leaf")) {
 
       // If bone name starts with "DEF-", add it to deformBones
       deformBones.push(child);
-      console.log(`Deform Bone Found: ${child.name} at position:`, child.position);
+      // console.log(`Deform Bone Found: ${child.name} at position:`, child.position);
 
-      // Create a sphere for each deform bone with increased size (radius 0.5)
-      const sphereGeometry = new THREE.SphereGeometry(0.5);
-      const sphereMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffffff, // Red color
+      // Find the corresponding _leaf bone
+      const leafBone = gltfMesh.getObjectByName(`${child.name}_leaf`);
+      let controllerSize = 1; // Default size
+
+      if (leafBone) {
+        const bonePosition = new THREE.Vector3();
+        const leafPosition = new THREE.Vector3();
+        child.getWorldPosition(bonePosition);
+        leafBone.getWorldPosition(leafPosition);
+
+        // Compute distance and set controller size
+        controllerSize = bonePosition.distanceTo(leafPosition) * 0.5; // Adjust scaling factor as needed
+      }
+
+      // Create a controller with the computed size
+      const controllerGeometry = new THREE.SphereGeometry(controllerSize);
+
+      const controllerMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
         transparent: true,
         opacity: 0,    // Alpha transparency
       });
-      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-      sphere.position.copy(child.position);
-      scene.add(sphere);
+      const controller = new THREE.Mesh(controllerGeometry, controllerMaterial);
+      controller.position.copy(child.position);
+      scene.add(controller);
 
-      // Store the sphere and the associated bone
-      spheres.push({ bone: child, sphere: sphere });
+      // Store the controller and the associated bone
+      controllers.push({ bone: child, controller: controller });
 
       // Store the initial rest position of the bone
       child.userData.restPosition = child.position.clone();
       springVelocities[child.name] = new THREE.Vector3(); // Initialize spring velocity
+
     }
   });
 
-  skeleton = testSuzanne.getObjectByName("RIG-suzanne");
-  scene.add(testSuzanne);
+  scene.add(gltfMesh);
 });
 
 // Add light
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
 scene.add(hemiLight);
 
+const light = new THREE.DirectionalLight(0xffffff, 0.5);
+light.position.set(10, 10, 10);
+scene.add(light);
 
+const ambientLight = new THREE.AmbientLight(0x404040, 0.5); // Softer overall lighting
+scene.add(ambientLight);
 
 // Mouse Events
 window.addEventListener("mousedown", onMouseDown, false);
 window.addEventListener("mousemove", onMouseMove, false);
 window.addEventListener("mouseup", onMouseUp, false);
-window.addEventListener("mousemove", onMouseHover, false); // To handle hovering over spheres
+window.addEventListener("mousemove", onMouseHover, false); // To handle hovering over controllers
 
 function onMouseDown(event) {
   // Only proceed if left mouse button is clicked (button === 0)
@@ -157,16 +182,16 @@ function onMouseDown(event) {
   mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
   
   raycaster.setFromCamera(mouse, camera);
-  clickedOnSphere = false;
+  clickedOnController = false;
 
-  // Check for intersection with spheres
-  spheres.forEach(({ sphere, bone }) => {
-    const intersects = raycaster.intersectObject(sphere);
+  // Check for intersection with controllers
+  controllers.forEach(({ controller, bone }) => {
+    const intersects = raycaster.intersectObject(controller);
     if (intersects.length > 0) {
-      clickedOnSphere = true;
+      clickedOnController = true;
       selectedBone = bone;
       isDragging = true;
-      console.log(`Clicked on sphere, moving bone: ${bone.name}`);
+      // console.log(`Clicked on controller, moving bone: ${bone.name}`);
 
       // Lock the camera when dragging starts
       ctrls.enableRotate = false;
@@ -174,50 +199,114 @@ function onMouseDown(event) {
     }
   });
 
-  if (!clickedOnSphere) {
+  if (!clickedOnController) {
     ctrls.enableRotate = true;
     isUserRotating = true;
   }
 }
 
+// Global mouse vector, raycaster, and plane for eye tracking
+const mouse = new THREE.Vector2();
+const raycaster = new THREE.Raycaster();
+const plane = new THREE.Plane();
 
 function onMouseMove(event) {
+  // Update mouse coordinates normalized (-1 to +1)
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+  // ----- EYE TRACKING CODE -----
+  // Get eye objects and mid target (if loaded)
+  const eyeL = scene.getObjectByName('TGT-eyeL');
+  const eyeR = scene.getObjectByName('TGT-eyeR');
+  const tgtEyeMid = scene.getObjectByName('TGT-eye_mid');
+  if (eyeL && eyeR && tgtEyeMid) {
+    // Set up raycaster from camera and mouse
+    raycaster.setFromCamera(mouse, camera);
+    // Create a plane facing the camera with an offset distance
+    const offsetDistance = -2;
+    const planePoint = new THREE.Vector3(0, 0, 0).add(
+      camera.getWorldDirection(new THREE.Vector3()).multiplyScalar(offsetDistance)
+    );
+    plane.setFromNormalAndCoplanarPoint(
+      camera.getWorldDirection(new THREE.Vector3()), 
+      planePoint
+    );
+    // Calculate intersection of the ray with the plane
+    const intersection = new THREE.Vector3();
+    raycaster.ray.intersectPlane(plane, intersection);
+    // Update eye rotations to look at the intersection point
+    if (intersection) {
+      tgtEyeMid.lookAt(intersection);
+      eyeL.rotation.setFromRotationMatrix(tgtEyeMid.matrix);
+      eyeR.rotation.setFromRotationMatrix(tgtEyeMid.matrix);
+    }
+  }
+  // ----- END EYE TRACKING -----
+
+  // ----- BONE DRAGGING CODE (if dragging a bone) -----
   if (!isDragging || !selectedBone) return;
 
-  // Convert mouse movement to translation offset
+  // Convert mouse movement to translation offset in world space.
   const deltaX = event.movementX * 0.003;
   const deltaY = event.movementY * -0.003;
-
-  // Convert the mouse movement to a direction in world space
   const offset = new THREE.Vector3(deltaX, deltaY, 0);
 
-  // Get the selected bone's world position
+  // Get selected bone's current world position
   const boneWorldPosition = new THREE.Vector3();
   selectedBone.getWorldPosition(boneWorldPosition);
 
-  // Offset the bone's position based on mouse movement
-  const newBonePosition = boneWorldPosition.clone().add(offset);
-  selectedBone.position.copy(newBonePosition);
+  // Calculate new world position by adding offset
+  const newBoneWorldPosition = boneWorldPosition.clone().add(offset);
 
-  // Also update sphere position
-  spheres.forEach(({ sphere, bone: linkedBone }) => {
-    if (linkedBone === selectedBone) {
-      sphere.position.copy(newBonePosition);
+  // Convert new world position to the bone's local space
+  selectedBone.position.copy(selectedBone.parent.worldToLocal(newBoneWorldPosition.clone()));
+
+  // Update the corresponding controller position for the bone
+  controllers.forEach(({ controller, bone }) => {
+    if (bone === selectedBone) {
+      bone.getWorldPosition(controller.position);
     }
   });
 
-  // Reset inactivity timer for mesh
+  // Additional bone-specific handling (example for jaw/lip movement)
+  if (selectedBone.name === "DEF-jaw_bot") {
+    controllers.forEach(({ controller, bone }) => {
+      if (bone.name === "DEF-lip_bot") {
+        const parent = bone.parent;
+        const inverseMatrix = new THREE.Matrix4().copy(parent.matrixWorld).invert();
+        const localOffset = offset.clone().applyMatrix4(inverseMatrix);
+        bone.position.add(localOffset);
+        bone.getWorldPosition(controller.position);
+      }
+    });
+  }
+
+  if (selectedBone.name === "DEF-head_top") {
+    controllers.forEach(({ controller, bone }) => {
+      if (bone.name === "DEF-head_lock") {
+        const parent = bone.parent;
+        const localOffset = offset.clone().applyMatrix4(parent.matrixWorld.clone().invert());
+        bone.position.add(localOffset);
+        bone.getWorldPosition(controller.position);
+      }
+    });
+  }
+  // Reset mesh inactivity timer on movement
   lastMeshMoveTime = Date.now();
+  // ----- END BONE DRAGGING -----
 }
 
 function onMouseUp() {
   isDragging = false;
-  selectedBone = null;
+  if (selectedBone) {
+    selectedBone = null;
+  }
   ctrls.enableRotate = true;
   isUserRotating = false;
 
-  // Trigger camera snap-back when not dragging a sphere
-  if (!clickedOnSphere) {
+  // Trigger camera snap-back when not dragging a controller
+  if (!clickedOnController) {
     isSnappingBack = true;
   }
 }
@@ -229,15 +318,15 @@ function onMouseHover(event) {
   
   raycaster.setFromCamera(mouse, camera);
 
-  // Check for hover over spheres
-  spheres.forEach(({ sphere }) => {
-    const intersects = raycaster.intersectObject(sphere);
+  // Check for hover over controllers
+  controllers.forEach(({ controller }) => {
+    const intersects = raycaster.intersectObject(controller);
     if (intersects.length > 0) {
-      sphere.material.color.set(0x00ff00); // Green on hover
-      sphere.material.opacity = 0.2;
+      controller.material.color.set(COLORS.hover); // Green on hover
+      controller.material.opacity = 0.2;
     } else {
-      // sphere.material.color.set(0xff0000);
-      sphere.material.opacity = 0;
+      controller.material.color.set(COLORS.default);
+      controller.material.opacity = 0;
     }
   });
 }
@@ -253,9 +342,9 @@ function applySpringMovement() {
       const springForce = new THREE.Vector3().subVectors(restPosition, bone.position).multiplyScalar(springStiffness);
       velocity.add(springForce).multiplyScalar(1 - springDamping);
       bone.position.add(velocity);
-      spheres.forEach(({ sphere, bone: linkedBone }) => {
+      controllers.forEach(({ controller, bone: linkedBone }) => {
         if (linkedBone === bone) {
-          sphere.position.copy(bone.position);
+          controller.position.copy(bone.position);
         }
       });
     });
@@ -309,22 +398,65 @@ function updateSnapBack() {
   }
 }
 
-// Animation Loop
+// Inside the animate function
 function animate() {
   requestAnimationFrame(animate);
   applySpringMovement();
   limitOrbitFalloff();
-  renderer.render(scene, camera);
-  ctrls.update();
   updateSnapBack();
+  ctrls.update();
+  renderer.render(scene, camera);
 }
 
 animate();
 
+// Debounce utility function
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
 // Automatic Resize
 function handleWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  const section = document.getElementById('Home');
+  const sectionWidth = section.clientWidth * 0.8;
+  const sectionHeight = section.clientHeight * 0.8;
+  const aspectRatio = sectionWidth / sectionHeight;
+
+  let width, height;
+
+  if (aspectRatio > 16 / 9) {
+    width = sectionHeight * (16 / 9);
+    height = sectionHeight;
+  } else {
+    width = sectionWidth;
+    height = sectionHeight;
+  }
+
+  // Calculate the new camera z position based on the width
+  const minAspectRatio = 308.8 / 392;
+  const maxAspectRatio = 16 / 9;
+  const minZ = 8; // Minimum z position for the camera
+  const maxZ = 5; // Maximum z position for the camera
+
+  const aspectRatioClamped = THREE.MathUtils.clamp(aspectRatio, minAspectRatio, maxAspectRatio);
+  const t = (aspectRatioClamped - minAspectRatio) / (maxAspectRatio - minAspectRatio);
+  const newZ = THREE.MathUtils.lerp(minZ, maxZ, t);
+
+  // Smoothly change the camera z position
+  camera.position.z = newZ;
+  defaultPosition.z = newZ;
+
+  console.log(width, height);
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(width, height);
 }
-window.addEventListener("resize", handleWindowResize, false);
+
+window.addEventListener("resize", debounce(handleWindowResize, 100), false);
+
+// Initial setup
+handleWindowResize();
