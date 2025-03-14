@@ -17,10 +17,17 @@ section {
     padding: 20px 0;
     position: fixed;
     width: 100%;
+    height: 40px;
     top: 0;
     left: 0;
     z-index: 10;
     box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
   }
   
   nav ul {
@@ -32,30 +39,129 @@ section {
     justify-content: center;
   }
   
-  nav li {
-    margin: 0px 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: transparent 2px;
-  }
+nav li {
+  margin: 0px 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative; /* Add this to position the pseudo-element */
+}
 
-  nav li:hover {
-    /* padding: 5px 10px; */
-    background-color: #231823;
-    border-radius: 10px;
-    box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5), inset -5px -5px 5px rgba(255, 255, 255, 0.05);
-    border:#eee 2px;
-  }
-  
+nav li:hover {
+  background-color: #231823;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5), inset -5px -5px 5px rgba(255, 255, 255, 0.05);
+}
+
+nav li:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* border: 2px solid #eee; */
+  border-top: 2px inset black;
+  border-radius: 10px;
+  pointer-events: none; /* Ensure the pseudo-element doesn't interfere with hover */
+}
   nav a {
     color: #eee;
     text-decoration: none;
-    font-size: 18px;
+    font-size: clamp(0.7rem, 2vw, 1.5rem);
   }
   
-  /* nav a:hover {
-    text-decoration: underline;
-  } */
+
+
+/* Hide navigation links by default on small screens */
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #eee;
+  padding: 10px 20px; /* Match padding with nav li */
+  position: fixed;
+  top: 10px;
+  right: 2vw;
+  /* transform: translate(-50%, -50%); */
+  z-index: 20; /* Ensure it stays above other elements */
+}
+
+.menu-icon:hover,
+.menu-icon.open {
+  background-color: #231823;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.5), inset -5px -5px 5px rgba(255, 255, 255, 0.05);
+}
+
+.menu-icon:hover::before,
+.menu-icon.open::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 2px inset black;
+  border-radius: 10px;
+  pointer-events: none; /* Ensure the pseudo-element doesn't interfere with hover */
+}
+
+/* Hide navigation links by default on small screens */
+#nav-menu {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  /* padding-top: 10px; */
+  /* padding-bottom: 10px; */
+  /* translate: 0 60px; */
+  background-color: #130D13;
+  /* box-shadow: #0D0709 0px 20px 20px; */
+
+}
+
+#nav-menu ul {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  #nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #130D13;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    translate: 0 60px;
+    box-shadow: #0D0709 0px 20px 20px;
+  }
+
+  #nav-menu ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #nav-menu li {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  #nav-menu li:hover {
+    background-color: #231823;
+  }
+}
+
+/* Show the menu when the menu-icon is clicked */
+#nav-menu.show {
+  display: flex;
+}
+  
   
 /* Ensure #Home is fullscreen */
 #Home {
