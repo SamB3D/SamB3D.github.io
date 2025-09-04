@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="./styles.css">
     <script src="time.js"></script>
@@ -12,7 +13,7 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Sam's Portfolio">
     <meta property="og:description" content="I'm a freelance 3D Rigger, Generalist and Storyteller, always looking for a new and exciting project to work on!">
-    <meta property="og:image" content="assets/Samuel_Bienz.jpg">
+    <meta property="og:image" content="./assets/Samuel_Bienz.jpg">
     <meta property="og:url" content="https://SamB3D.github.io">
     <meta property="og:type" content="website">
         
@@ -35,139 +36,237 @@
       </div>
       <nav id="nav-menu">
         <ul>
-          <li onclick="location.href='#Home'"><a href="#Home">Home</a></li>
-          <li onclick="location.href='#about'"><a href="#about">About</a></li>
-          <li onclick="location.href='#projects'"><a href="#projects">Projects</a></li>
-          <li onclick="location.href='#contact'"><a href="#contact">Contact</a></li>
+          <li onclick="location.href='#home'"><a href="#home">HOME</a></li>
+          <li onclick="location.href='#projects'"><a href="#projects">PROJECTS</a></li>
+          <li onclick="location.href='#contact'"><a href="#contact">CONTACT</a></li>
         </ul>
       </nav>
     </header>
 
-    <section id="Home">
-      <!-- Main content container with Three.js canvas and the welcome message -->
-      <div id="main-container">
-        <!-- Welcome message overlay -->
-        <div id="welcomeMessage">
-          <h2>Welcome to</h2>
-          <h1>Sam's Portfolio</h1>
-        </div>
-        <!-- Load the Three.js script -->
-        <script type="module" src="index.js"></script>
+    <!-- Home section -->
+    <section id="home">
+      <div class="home-header">
+        <!-- empty space under header -->
       </div>
-    </section>
 
+      <div class="home-title-container">
+        <!-- left -->
+        <h1>SAMUEL BIENZ</h1>
+        <div class="home-subtitle-container">
+          <!-- right -->
+          <div class="home-p-spacer"></div>
+          <h2>3D RIGGER | GENERALIST   </h2>
+          <!-- right, under h2, aligned to right -->
+          <div class="home-social-links">
+            <a href="https://www.linkedin.com/in/samuel-bienz-b28484247/" target="_blank">LinkedIn</a> | 
+            <a href="https://linktr.ee/gladnox" target="_blank">Social Media</a>
+          </div>
 
-    <!-- About section -->
-    <section id="about">
-      <div class="about-content">
-        <div class="about-image"></div>
-        <div class="about-text">
-          <h2>About</h2>
-          <p>I'm a freelance 3D Rigger, Generalist and Storyteller, always looking for a new and exciting project to work on!</p>
+        </div>
+      </div>
+
+      <div class="home-content">
+        <img class="home-image" src="./assets/portrait.png" alt="Low-Poly Selfportrait"></img>
+        <div class="home-text">
+          <p>Passionate <strong>3D rigging artist</strong> with well rounded experience as a <strong>generalist</strong> across the <strong>gaming</strong> and <strong>film</strong> pipelines. Adept at using industry-standard tools like <strong>Blender, Maya, Houdini, Unity</strong> and <strong>Unreal Engine 5</strong>. Experienced in <strong>scripting</strong> with <strong>Python</strong> and <strong>node-based programming</strong> languages (<strong>Geometry Nodes</strong>, Houdini). A <strong>collaborative</strong> team player with excellent <strong>communication</strong> skills and a proven record of working with <strong>international</strong> studios.</p>
+          <div class="home-applications-container">
+            <img class="home-applications" src="./assets/icons/blender.png" alt="Blender Icon"></img>
+            <img class="home-applications" src="./assets/icons/maya.png" alt="Maya Icon"></img>
+            <img class="home-applications" src="./assets/icons/houdini.png" alt="Houdini Icon"></img>
+            <img class="home-applications" src="./assets/icons/python.png" alt="Python Icon"></img>
+            <img class="home-applications" src="./assets/icons/unity.svg" alt="Unity Icon"></img>
+            <img class="home-applications" src="./assets/icons/unrealengine.png" alt="Unreal Engine Icon"></img>
+          </div>
+        </div>
+      </div>
+      <div class="home-projects-container">
+        <div class="home-projects-outline">
+          <img class="home-projects-image" src="assets\BTS_Pics\Your New Reality_BTS\TheBards-YourNewReality_square.jpg" alt="Project: The Bards - Your New Reality Icon"></img>
+          <img class="home-projects-image" src="assets\BTS_Pics\DC_Heroes_United_BTS\DC_Heroes_United_cover_square.png" alt="Project: DC Heroes United Icon"></img>
+          <img class="home-projects-image" src="assets\BTS_Pics\IndustrialAnnihilation BTS\IndustrialAnnihilation_square.jpg" alt="Project: Industrial Annihilation Icon"></img>
+          <img class="home-projects-image" src="assets\BTS_Pics\TurnedOn_BTS\TurnedOn_square.png" alt="Project: Turned On Icon"></img>
+          <img class="home-projects-image" src="assets\BTS_Pics\Nox64_BTS\NOX64_square.png" alt="Project: NOX64 Icon"></img>
+          <img class="home-projects-image" src="assets\BTS_Pics\Fudge_BTS\Fudge_Robot_square.png" alt="Project: Fudge Robot Icon"></img>
         </div>
       </div>
     </section>
 
     <!-- Projects section -->
     <section id="projects">
-      <div class="projects-container">
-        <h1>Projects</h1>
+      <h1>PROJECTS</h1>
 
-        <!-- Rigging Reel -->
-        <div class="project-main">
+      <!-- Rigging Reel -->
+      <!-- START -->
+      <div class="project-container">
+        <div class="project-visuals">
+
+          <!-- IMAGES -->
+          <div class="project-images">
+            <img src="assets\BTS_Pics\Your New Reality_BTS\img2.png" alt="">
+            <img src="assets\BTS_Pics\Your New Reality_BTS\img1.png" alt="">
+            <img src="assets\BTS_Pics\Your New Reality_BTS\img3.png" alt="">
+            <img src="assets\BTS_Pics\Your New Reality_BTS\img4.png" alt="">
+          </div>
+
+          <!-- VIDEO -->
           <div class="project-video">
-            <iframe src="https://www.youtube.com/embed/USU8J1b26Hg" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/bq-At1tZQxg" allowfullscreen alt="Video: The Bards - Your New Reality"></iframe>
           </div>
-          <div class="project-main-text">
-            <h4>Rigging Reel</h4>
-            <p>I am currently expanding my knowledge in Blender Python, Blender Studios's CloudRig and rigging in MAYA and will update my Reel as soon as possible. In the meantime check out the projects I've worked on:</p>
-          </div>
+
         </div>
 
-
-
-        <!-- Project 1 -->
-        <div class="project">
-          <div class="project-text">
-            <h4>The Bards - Your New Reality</h4>
-            <p>Lead Character Rigger on a Honkai Star Rail animated music video made and produced by Bucket Studio Ltd.</p>
-          </div>
-          <div class="project-video">
-            <iframe src="https://www.youtube.com/embed/bq-At1tZQxg" allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project">
-          <div class="project-video">
-            <iframe src="https://www.youtube.com/embed/G8axRDGWDHs" allowfullscreen></iframe>
-          </div>
-          <div class="project-text">
-            <h4>DC Heroes United</h4>
-            <p>Lead Character Rigger and Environmental Artist on the <a href="https://dcheroesunited.com/">DC Heroes United</a> series episode 1-4 made by Bucket Studio Ltd. and produced by Genvid Entertainment.</p>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="project">
-          <div class="project-text">
-            <h4>Turned On -[adult swim] ident</h4>
-            <p>Director of an ident short for [adult swim] Europe during Bachelor programme at HSLU (Lucerne University of Applied Sciences and Arts). Check out the official <a href="https://www.instagram.com/reel/DEaI2Vipwxt/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==">Instagram</a> post!</p>
-          </div>
-          <div class="project-video">
-            <iframe src="https://www.youtube.com/embed/dKMgJxt9VGo" allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project">
-          <div class="project-video">
-            <img src="assets/pulpnoir_closeencounters.jpg" alt="Close Encounters">
-          </div>
-          <div class="project-text">
-            <h4>pulp.noir - Close Encounters</h4>
-            <p>Expert Volumetric Video Capturing and Cleanup for a VR project by <a href="https://www.pulpnoir.ch/digital/close-encounters/">pulp.noir</a> (Julia Morph).</p>
-          </div>
-        </div>
-      
-
-        <h1>Personal Projects</h1>
-        
-        <!-- Personal Project 1 -->
-        <div class="project">
-          <div class="project-text">
-            <h4>NOX 64</h4>
-            <p>Facial rig using Blender Studio's Cloudrig. Featuring a vast range of expressiveness via action constraints and drivers.</p>
-          </div>
-          <div class="project-video">
-            <iframe src="https://www.youtube.com/embed/5SYAwQSiozc" allowfullscreen></iframe>
-          </div>
+        <!-- TEXT -->
+        <div class="project-text">
+          <h2>The Bards - Your New Reality</h2>
+          <p>Rigger for a Honkai Star Rail Music Video!</p>
         </div>
       </div>
+      <!-- END -->
+
+      <!-- START -->
+      <div class="project-container">
+        <div class="project-visuals">
+
+          <!-- IMAGES -->
+          <div class="project-images">
+            <img src="assets\BTS_Pics\DC_Heroes_United_BTS\img1.png" alt="">
+            <img src="assets\BTS_Pics\DC_Heroes_United_BTS\img2.png" alt="">
+            <img src="assets\BTS_Pics\DC_Heroes_United_BTS\img3.png" alt="">
+            <img src="assets\BTS_Pics\DC_Heroes_United_BTS\img4.png" alt="">
+          </div>
+
+          <!-- VIDEO -->
+          <div class="project-video">
+            <iframe src="https://www.youtube.com/embed/G8axRDGWDHs" allowfullscreen alt="Video: DC Heroes United Episode 1"></iframe>
+          </div>
+
+        </div>
+
+        <!-- TEXT -->
+        <div class="project-text">
+          <h2>DC Heroes United</h2>
+          <p>Rigger and Environmental Artist for an interactive series in the DCU, where viewers can shape the story!</p>
+        </div>
+      </div>
+      <!-- END -->
+
+      <!-- START -->
+      <div class="project-container">
+        <div class="project-visuals">
+
+          <!-- IMAGES -->
+          <div class="project-images">
+            <img src="assets\BTS_Pics\IndustrialAnnihilation BTS\img1.png" alt="">
+            <img src="assets\BTS_Pics\IndustrialAnnihilation BTS\img2.png" alt="">
+            <img src="assets\BTS_Pics\IndustrialAnnihilation BTS\img3.png" alt="">
+            <img src="assets\BTS_Pics\IndustrialAnnihilation BTS\img4.png" alt="">
+          </div>
+
+          <!-- IMG -->
+          <div class="project-img">
+            <a href="https://store.steampowered.com/app/1796720/Industrial_Annihilation/" target="_blank"><img src="assets\BTS_Pics\IndustrialAnnihilation BTS\IA_header.jpg" alt="Image with link: Steam page of Industrial Annihilation"></img></a>
+          </div>
+
+        </div>
+
+        <!-- TEXT -->
+        <div class="project-text">
+          <h2>Industrial Annihilation</h2>
+          <p>Generalist for the newest installation in the “Annihilation“-franchise - one of most successful early Kickstarter games!</p>
+        </div>
+      </div>
+      <!-- END -->
+
+      <!-- START -->
+      <div class="project-container">
+        <div class="project-visuals">
+
+          <!-- IMAGES -->
+          <div class="project-images">
+            <img src="assets\BTS_Pics\TurnedOn_BTS\img1.png" alt="">
+            <img src="assets\BTS_Pics\TurnedOn_BTS\img2.png" alt="">
+            <img src="assets\BTS_Pics\TurnedOn_BTS\img3.png" alt="">
+            <img src="assets\BTS_Pics\TurnedOn_BTS\img4.png" alt="">
+          </div>
+
+          <!-- VIDEO -->
+          <div class="project-video">
+            <iframe src="https://www.youtube.com/embed/dKMgJxt9VGo" allowfullscreen alt="Video: Turned On"></iframe>
+          </div>
+
+        </div>
+
+        <!-- TEXT -->
+        <div class="project-text">
+          <h2>Turned On / Turn it On</h2>
+          <p>Director and Generalist for a viral <a href="https://www.instagram.com/reel/DEaI2Vipwxt/?utm_source=ig_web_button_share_sheet">[adult swim] Europe</a> short, sitting at over 9M views!</p>
+        </div>
+      </div>
+      <!-- END -->
+
+      <!-- START -->
+      <div class="project-container">
+        <div class="project-visuals">
+
+          <!-- IMAGES -->
+          <div class="project-images">
+            <img src="assets\BTS_Pics\NOX64_BTS\img1.png" alt="">
+            <img src="assets\BTS_Pics\NOX64_BTS\img2.png" alt="">
+            <img src="assets\BTS_Pics\NOX64_BTS\img3.png" alt="">
+            <img src="assets\BTS_Pics\NOX64_BTS\img4.png" alt="">
+          </div>
+
+          <!-- VIDEO -->
+          <div class="project-video">
+            <iframe src="https://www.youtube.com/embed/5SYAwQSiozc" allowfullscreen alt="Video: NOX 64 | CloudRig Face Rig | Blender 4.3 | Showcase"></iframe>
+          </div>
+
+        </div>
+
+        <!-- TEXT -->
+        <div class="project-text">
+          <h2>NOX64</h2>
+          <p>Cartoony face rig experimentation with mouth-zip and many other features!</p>
+        </div>
+      </div>
+      <!-- END -->
+
+
+
 
     </section>
 
-
-
-
     <!-- Contact section -->
     <section id="contact">
-      <h2>Contact</h2>
-      <div class="contact-box">
-        <div>
-          <h3>Timezone</h3>
-          <p>Switzerland (GMT+1) </p>
-          <p>Currently: <span id="timeDisplay"></span></p>
+      <div class="contact">
+
+        <div class="contact-header">
+          <h1>CONTACT</h1>
+          <p>Mail: samuel.bienz@bluewin.ch</p>
         </div>
         
-        <div>
-          <h3>Email</h3>
-          <p><a href="mailto:samuel.bienz@bluewin.ch">samuel.bienz@bluewin.ch</a></p>
+        <div class="contact-main">
+
+
+          <div class="social-icons left">
+            <a href="http://linktr.ee/gladnox" target="_blank"><img src="/assets/icons/linktree.png" alt="LinkTree"></a>
+            <a href="https://www.instagram.com/glad_nox/" target="_blank"><img src="/assets/icons/instagram.png" alt="Instagram"></a>
+            <a href="https://www.artstation.com/gladnox" target="_blank"><img src="/assets/icons/artstation.png" alt="Artstation"></a>
+          </div>
+
+
+          <div id="contact-container">  
+            <script type="module" src="index.js"></script>
+          </div>
+
+
+          <div class="social-icons right">
+            <a href="https://www.linkedin.com/in/samuel-bienz-b28484247/" target="_blank"><img src="/assets/icons/linkedin.png" alt="LinkedIn"></a>
+            <a href="https://www.youtube.com/@gladnox" target="_blank"><img src="/assets/icons/youtube.png" alt="YouTube"></a>
+            <a href="https://github.com/SamB3D" target="_blank"><img src="/assets/icons/github.png" alt="GitHub"></a>
+          </div>
         </div>
-        <div>
-          <h3>Social Media</h3>
-          <p><a href="https://www.linkedin.com/in/samuel-bienz-b28484247/">LinkedIn</a> | <a href="https://linktr.ee/gladnox">Linktree</a> | <a href="https://github.com/SamB3D">GitHub</a></p>
-        </div>
+
       </div>
     </section>
 

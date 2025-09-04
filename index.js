@@ -12,16 +12,18 @@ const COLORS = {
 };
 
 // Initiate basics
-const w = window.innerWidth;
-const h = window.innerHeight;
+// const w = window.innerWidth;
+// const h = window.innerHeight;
+const w = 1000;
+const h = 1000;
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(30, w / h, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(37, w / h, 0.1, 1000);
 camera.position.set(0, 0, 5);
 const defaultTarget = new THREE.Vector3(0, 0, 0);
 const defaultPosition = new THREE.Vector3(0, 0, 5); // Default camera position
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
-document.body.appendChild(renderer.domElement);
+document.getElementById("contact-container").appendChild(renderer.domElement);
 
 // Orbit Controls
 const ctrls = new OrbitControls(camera, renderer.domElement);
