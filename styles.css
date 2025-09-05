@@ -376,10 +376,12 @@ nav li:hover::before {
   aspect-ratio: 32/9;
   grid-template-columns: 1fr 1fr;
   background-color: var(--color-main2);
+  grid-template-areas: "images video";
 }
 
 /* Images Grid */
 .project-images {
+  grid-area: images;
   justify-content: center;
   align-items: center;
   display: grid;
@@ -395,6 +397,7 @@ nav li:hover::before {
 
 /* VIDEO/IMG */
 .project-video {
+  grid-area: video;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -456,10 +459,11 @@ nav li:hover::before {
 }
 
 .project-text p {
+  margin: 1vw 2vw 1vw 2vw;
   display: flex;
   align-items: center;
   justify-content: center; /* or flex-start if you want left alignment */
-  gap: 0.25em; /* optional, adds spacing between text and link */
+  gap: 0.25em;
 }
 
 .project-text a {
@@ -475,6 +479,21 @@ nav li:hover::before {
   padding: 1vw 0;
 }
 
+@media (max-width: 768px) {
+  .project-container {
+    width: 90vw;
+  }
+
+  .project-visuals {
+    grid-template-columns: 2fr;
+    grid-template-areas:
+    "video"
+    "images";
+    aspect-ratio: 16/18;
+  }
+
+}
+
 
 /* Contact section container */
 .contact {
@@ -485,8 +504,8 @@ nav li:hover::before {
   justify-content: center;      /* center vertically, will adjust later */
   background: var(--color-main1);
   box-sizing: border-box;
-  border-top: 20px solid var(--color-main2);
-  border-bottom: 20px solid var(--color-main2);
+  border-top: 1.5vmin solid var(--color-main2);
+  border-bottom: 1.5vmin solid var(--color-main2);
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -559,6 +578,7 @@ canvas {
 }
 
 @media (max-width: 768px) {
+
 
 .contact-header {
   translate: 0 -3vh;
