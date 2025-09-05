@@ -363,11 +363,16 @@ nav li:hover::before {
   width: 80vw;
   background-color: var(--color-main2);
   box-sizing: border-box;
-  border: 1.5vmin solid var(--color-main2);
+  border-right: 2vmin solid var(--color-main2);
+  border-left: 2vmin solid var(--color-main2);
+  border-top: 1.5vmin solid var(--color-main2);
+  border-bottom: 1.5vmin solid var(--color-main2);
+  /* border: 1.5vmin solid var(--color-main2); */
   border-radius: calc(min(20vh, 15vw)*0.1*1.25);
   margin-top: 2vmin;
   margin-bottom: 2vmin;
 }
+
 
 .project-visuals {
   display: grid;
@@ -377,7 +382,9 @@ nav li:hover::before {
   grid-template-columns: 1fr 1fr;
   background-color: var(--color-main2);
   grid-template-areas: "images video";
+  gap: 1vmin;
 }
+
 
 /* Images Grid */
 .project-images {
@@ -387,43 +394,46 @@ nav li:hover::before {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+  gap: 1vmin;
 }
+
 
 .project-images img {
   width: 100%;
   height: auto;
   aspect-ratio: 16/9;
+  border-radius: calc(min(20vh, 15vw)*0.1);
 }
 
 /* VIDEO/IMG */
 .project-video {
   grid-area: video;
-  display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .project-video iframe {
   width: 100%;
   aspect-ratio: 16/9;
   height: auto;
-  border: none;
+  box-sizing: border-box;
+  border: -1.5vmin solid var(--color-main2);
+  border-radius: calc(min(20vh, 15vw)*0.1);
 }
 
 .project-img {
   aspect-ratio: 16/9;
-  display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;   /* ensures extra parts are cut */
 }
 
 .project-img img {
   width: 100%;
-  height: 100%;        /* fill container’s height */
-  object-fit: cover;   /* crop instead of stretch */
-  object-position: center;
-  display: block;      /* removes baseline spacing */
+  aspect-ratio: 16/9;
+  height: auto;
+  box-sizing: border-box;
+  border-radius: calc(min(20vh, 15vw)*0.1);
 }
 
 .project-img a {
@@ -434,13 +444,19 @@ nav li:hover::before {
 
 
 
+
+
+
+
+
 /* Text below */
 .project-text {
   width: 100%;
   border-top: 1.5vmin solid var(--color-main2);
-  align-items: stretch; /* both children stretch equally */
+  align-items: center;
   background-color: var(--color-main1);
   border-radius: 0 0 calc(min(15vh, 10vw)*0.1) calc(min(15vh, 10vw)*0.1);
+  grid-area: text;
 }
 
 .project-text h2,
@@ -449,34 +465,34 @@ nav li:hover::before {
   align-items: center;
   padding: 0;
   margin: 0;
+  text-align: center;
+  hyphens: auto;
 }
 
 .project-text h2{
-  font-size: clamp(28px, 2.5vw, 64px);
+  font-size: min(8vh, 6vw);
   color: var(--color-main3);
-  text-align: center;
-  padding: 1vw;
+  padding: 2vmin;
 }
 
 .project-text p {
-  margin: 1vw 2vw 1vw 2vw;
-  display: flex;
+  margin: 1vmin 2vmin 1vmin 2vmin;
   align-items: center;
-  justify-content: center; /* or flex-start if you want left alignment */
-  gap: 0.25em;
+  justify-content: center;
 }
 
 .project-text a {
-  display: inline; /* reset */
-  translate: 0;    /* reset, prevents odd vertical offset */
+  display: inline;
+  translate: 0;
 }
 
 
 .project-text p,
 .project-text a{
-  text-align: left;
+  font-size: min(2.5vh, 2.5vw);
+  text-align: center;
   align-items: center;
-  padding: 1vw 0;
+  hyphens: auto;
 }
 
 @media (max-width: 768px) {
@@ -493,6 +509,91 @@ nav li:hover::before {
   }
 
 }
+
+/* New Container */
+.project-container-2 {
+  display: flex;
+  flex-direction: row;   /* two next to each other */
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2vmin;            /* space between the two cards */
+  width: 80vw;
+  margin: auto;
+
+  padding-top: 2vmin;
+  padding-bottom: 2vmin;
+}
+
+/* Each project block inside */
+.project-visuals-2 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 2vmin solid var(--color-main2);
+  background-color: var(--color-main2);
+  border-radius: calc(min(20vh, 15vw)*0.1);
+  overflow: hidden;
+}
+
+/* Images grid (4x4, but here it's 2x2 since 4 images total) */
+.project-images-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1vmin;
+  padding: 1vmin;
+}
+
+.project-images-2 img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: calc(min(20vh, 15vw)*0.1);
+}
+
+/* Text under images */
+/* Text below (new cards) */
+.project-text-2 {
+  width: 100%;
+  border-top: 1.5vmin solid var(--color-main2);
+  align-items: center;
+  background-color: var(--color-main1);
+  border-radius: 0 0 calc(min(15vh, 10vw)*0.1) calc(min(15vh, 10vw)*0.1);
+  text-align: center;
+}
+
+.project-text-2 h2,
+.project-text-2 p {
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  hyphens: auto;
+}
+
+.project-text-2 h2 {
+  font-size: min(8vh, 6vw);
+  color: var(--color-main3);
+  padding: 2vmin;
+}
+
+.project-text-2 p {
+  margin: 1vmin 2vmin;
+  font-size: min(2.5vh, 2.5vw);
+  align-items: center;
+  justify-content: center;
+  hyphens: auto;
+}
+
+.project-text-2 a {
+  display: inline;
+  translate: 0;
+  font-size: min(2.5vh, 2.5vw);
+  text-align: center;
+  align-items: center;
+}
+
 
 
 /* Contact section container */
