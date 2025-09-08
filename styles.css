@@ -340,7 +340,6 @@ nav a:hover { text-decoration: none; }
 @media (max-width: 768px) {
   .home-header {
     height: 18vmin;
-    background-color: yellowgreen;
   }
 
   .home-title-container {
