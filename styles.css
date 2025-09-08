@@ -64,7 +64,7 @@ header {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 8vmin;
+  height: 12vmin;
   gap: 1.2vmin;
   z-index: 10;
   overflow: visible;
@@ -76,7 +76,6 @@ header {
 nav {
   display: flex;
   justify-content: center;
-  /* gap: 1vmin; */
 }
 
 nav ul {
@@ -106,12 +105,13 @@ nav li:hover {
 nav a {
   color: var(--color-accent);
   text-decoration: none;
-  font-size: clamp(0.7rem, 2vw, 1.5rem);
+  font-size: 3vmin;
 }
 nav a:hover { text-decoration: none; }
 
 /* Menu icon for small screens */
 .menu-icon {
+  font-size: 6vmin;
   display: none;
   width: fit-content;
   height: auto;
