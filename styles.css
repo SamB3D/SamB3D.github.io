@@ -26,15 +26,23 @@ html, body {
 
 :target {
   /* Adjust scroll offset for anchored sections */
-  scroll-margin-top: 8vmin;
+  scroll-margin-top: 15vmin;
 }
 #contact:target {
-  scroll-margin-top: 6vmin;
+  scroll-margin-top: 13vmin;
+}
+
+.project-container:target{
+  scroll-margin-top: 11vmin;
+}
+
+.project-container-2:target {
+  scroll-margin-top: 10vmin;
 }
 
 /* Basic text elements */
 p, a {
-  font-size: clamp(8px, 0.75vw, 16px);
+  font-size: 1vmin;
   margin: 0;
   text-align: center;
   color: var(--color-main3);
@@ -64,7 +72,7 @@ header {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 12vmin;
+  height: 10vmin;
   gap: 1.2vmin;
   z-index: 10;
   overflow: visible;
@@ -111,7 +119,7 @@ nav a:hover { text-decoration: none; }
 
 /* Menu icon for small screens */
 .menu-icon {
-  font-size: 6vmin;
+  font-size: 10vmin;
   display: none;
   width: fit-content;
   height: auto;
@@ -147,6 +155,8 @@ nav a:hover { text-decoration: none; }
 
 /* Responsive nav menu (mobile) */
 @media (max-width: 768px) {
+  header { height: 16vmin; }
+
   .menu-icon { display: block; }
 
 
@@ -200,11 +210,19 @@ nav a:hover { text-decoration: none; }
   text-align: right;
 }
 
-.home-header { height: 7.5vmin; }
+.home-header { height: 10vmin; }
+
+.home-p-spacer{
+  width:100%;
+  height: min(2vh, 1vw);
+  background-color: none;
+  z-index: 100;
+}
 
 .home-title-container {
   height: 20.5vmin;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 2vmin;
@@ -214,6 +232,7 @@ nav a:hover { text-decoration: none; }
   flex-direction: column;
   align-items: flex-end;
 }
+
 .home-subtitle-container h2,
 .home-subtitle-container p { margin: 0; }
 
@@ -316,6 +335,36 @@ nav a:hover { text-decoration: none; }
   transform: scale(1.15);
   border-radius: calc(min(20vh,15vw) * 0.1 * 1.25);
   z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .home-header {
+    height: 18vmin;
+    background-color: yellowgreen;
+  }
+
+  .home-title-container {
+    flex-direction: column;
+    height: auto;
+    gap:0;
+  }
+
+  #home h1 {
+    font-size: 5vmin;
+  }
+
+  .home-subtitle-container {
+    padding: 1vw;
+  }
+  
+  .home-subtitle-container h2 {
+  font-size: 3vmin;
+  }
+
+  .home-social-links,
+  .home-social-links a {
+    font-size: 2vmin;
+  }
 }
 
 /* -----------------------------------------
@@ -515,7 +564,7 @@ nav a:hover { text-decoration: none; }
    - Canvas + social icons layout with responsive rules
    ----------------------------------------- */
 #contact {
-  height: 94vh;
+  height: 93.5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
