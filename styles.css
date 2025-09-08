@@ -585,13 +585,17 @@ nav a:hover { text-decoration: none; }
   justify-content: space-between;
   padding: 20px 0;
 }
-
-#contact-header {
-  position: absolute;
-  text-align: center;
+.contact-header {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+}
+.contact-header a {
+  text-align: center;
+  font-size: 2vmin;
 }
 
 .contact-main {
@@ -599,6 +603,17 @@ nav a:hover { text-decoration: none; }
   align-items: center;
   justify-content: center;
   gap: 40px;
+}
+
+@media (max-width: 768px) {
+  .contact-header h1 {
+  text-align: center;
+  font-size: 12vmin;
+  }
+  .contact-header a {
+  text-align: center;
+  font-size: 4vmin;
+  }
 }
 
 /* Vertical stack of social icons */
